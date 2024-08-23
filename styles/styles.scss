@@ -1,0 +1,36 @@
+@import
+  'fonts',
+  'globals',
+  'media',
+  'mixins',
+  'normallize',
+  'utils',
+  'variables';
+
+@import
+  "blocks/field",
+  "blocks/radio",
+  "blocks/radios",
+  "blocks/button", /* если позже захотим как-то повлиять на кнопку в других файлах, нужно помещать его в начале, чтобы стили смогли перебить базовые стили*/
+  "blocks/grid",
+  "blocks/burger-button",
+  "blocks/header",
+  "blocks/cross-button",
+  "blocks/mobile-overlay",
+  "blocks/section",
+  "blocks/hero",
+  "blocks/banner",
+  "blocks/puddle-bg",
+  "blocks/service-card",
+  "blocks/services",
+  "blocks/studies",
+  "blocks/process",
+  "blocks/team",
+  "blocks/team-card",
+  "blocks/paggination",
+  "blocks/reviews",
+  "blocks/review-card",
+  "blocks/contact-us",
+  "blocks/soc1als",
+  "blocks/subscribe-form",
+  "blocks/footer";

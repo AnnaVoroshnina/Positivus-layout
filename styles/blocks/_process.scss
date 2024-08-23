@@ -1,0 +1,130 @@
+.process{
+  &__list{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+    counter-reset: custom-counter;
+    /*Создает счетчик, в значении имя счётчика,
+    а затем его начальное целочисленное значение*/
+    list-style: none;/*убираем оригинальынен числовые маркеры*/
+
+    @include mobile{
+      row-gap: 20px;
+    }
+  }
+
+  &__item{
+    --conterContent: counter(custom-counter);
+    /*возвращает значение самого последнего счётчика с указанным именем
+    в наборе всех CSS-счётчиков, которые унаследовал элемент.*/
+
+    counter-increment: custom-counter;
+    /*Счётчик будет увеличиваться на 1 от элемента к элементу*/
+
+
+    &:nth-child(-n+9){ /*для первых девяти элементов добавлять 0 впереди*/
+      --conterContent: "0" counter(custom-counter);
+    }
+  }
+
+  &__accordion{
+    --indicatorVerticalRotate: 90deg;
+
+    padding: 40px 60px;
+    background-color: var(--color-gray);
+    border: var(--border);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow);
+    transition-duration: var(--transition-duration);
+
+    @include hover{
+      background-color: var(--color-accent);
+    }
+
+    @include mobile{
+      padding: 30px;
+    }
+
+    &[open] { /*селеткор по атрибут open, меняем стили, когда элемент раскрыт*/
+      --indicatorVerticalRotate: 0deg;
+      /*при раскрытии + превращался в -, меняем градус поворота у черточки афтер */
+
+      background-color: var(--color-accent);
+    }
+
+    &-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 50px;
+      cursor: pointer;
+      user-select: none; /*при двойном клике не будет выделяться заголовок*/
+
+      @include mobile{
+        column-gap: 28px;
+      }
+    }
+
+    &-title{
+      display: flex;
+      align-items: center;
+      column-gap: 25px;
+
+      @include fluid-text(18, 30);
+
+      @include mobile{
+        column-gap: 33px;
+      }
+
+      &::before{
+        content: var(--conterContent);
+        /*при помощи спец фуекции преедали в значение наш счетчик,
+        '0' добавится в начале к каждому числу*/
+        font-size: 2em;
+
+        @include mobile{
+          font-size: 30px;
+        }
+      }
+    }
+
+    &-indicator{
+      @include flex-center;
+      @include square(58px);
+
+      flex-shrink: 0; /*элемент не будет меняться, даже если не хватает места*/
+      position: relative;
+      background-color: var(--color-gray);
+      border: var(--border);
+      border-radius: 50%;
+
+      @include mobile{
+       width: 30px;
+      }
+
+      &::before,
+      &::after{
+        @include  abs-center; /*абсолютное позиционирование*/
+
+        content: "";
+        position: absolute;
+        width: 45%;
+        height: 10%;
+        background-color: var(--color-dark);
+      }
+      &::after{
+        rotate: var(--indicatorVerticalRotate); /*поворачиваем элемент на 90 град*/
+        transition-duration: var(--transition-duration);
+      }
+    }
+
+    &-body{
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: var(--border);
+    }
+  }
+
+
+}
